@@ -1,0 +1,17 @@
+{
+  "name": "i10gz96-06glxuc",
+  "hash": "KSpsvw7ToRntdD52AQhjHizqA0BUMgMt5ynCc8gHmzc=",
+  "description": "Default Lambda@Edge for Next CloudFront distribution",
+  "memory": 512,
+  "timeout": 10,
+  "code": "/Users/yudu/dev/banyudu/utils/.serverless_nextjs/default-lambda",
+  "shims": [],
+  "handler": "index.handler",
+  "runtime": "nodejs12.x",
+  "env": {},
+  "role": {
+    "arn": "arn:aws:iam::286136663550:role/i10gz96-kys1lja"
+  },
+  "arn": "arn:aws:lambda:us-east-1:286136663550:function:i10gz96-06glxuc",
+  "region": "us-east-1"
+}

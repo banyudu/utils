@@ -1,0 +1,13 @@
+{
+  "region": "us-east-1",
+  "privateZone": false,
+  "domain": "banyudu.com",
+  "subdomains": [
+    {
+      "domain": "utils.banyudu.com",
+      "distributionId": "E1KT3LZ5QXA3L4",
+      "url": "https://dga68g7ksdqqx.cloudfront.net",
+      "type": "awsCloudFront"
+    }
+  ]
+}
