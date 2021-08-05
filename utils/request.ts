@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from 'axios'
-import { message } from 'antd'
 
 export const request = axios.create({
   baseURL: '/api',
@@ -11,7 +10,7 @@ request.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
   // Do something with response data
   if (response.data.code !== 0) {
-    message.error('接口异常')
+    console.error('接口异常')
   }
   return response
 }, async function (error) {
