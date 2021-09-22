@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@loadable/component": "^5.15.0",
+    "@tensorflow/tfjs": "^3.9.0",
+    "@tensorflow/tfjs-node": "^3.9.0",
     "axios": "^0.21.1",
     "install": "^0.13.0",
     "lodash": "^4.17.21",
