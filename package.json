@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emmda-design/react": "^0.0.1",
     "@loadable/component": "^5.15.0",
     "@tensorflow/tfjs": "^3.9.0",
     "@tensorflow/tfjs-node": "^3.9.0",
