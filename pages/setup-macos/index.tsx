@@ -70,6 +70,7 @@ const apps: Record<string, App> = {
   },
   cpulimit: brew('cpulimit'),
   deno: brew('deno'),
+  figma: brewCask('figma'),
   graphiql: brewCask('graphiql'),
   // home brew，用于安装一从brew应用，依赖于 command line tools
   homebrew: curl('HomeBrew', 'https://raw.githubusercontent.com/Homebrew/install/master/install.sh', ['commandLineTools']),
@@ -86,6 +87,7 @@ const apps: Record<string, App> = {
   redis: brew('redis'), // Redis KV存储
   rustup: curl('Rust安装器', 'https://sh.rustup.rs'), // Rust 版本管理工具
   sqlite: brew('sqlite'),
+  typora: brewCask('typora'),
   vscode: brewCask('visual-studio-code'), // 编辑器
   webstorm: brewCask('webstorm'), // 编辑器
   wrk: brew('wrk'), // 性能测试工具
