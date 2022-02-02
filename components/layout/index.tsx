@@ -8,11 +8,11 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children, title }) => {
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-screen h-screen max-w-full'>
       <Head>
         <title>{title}</title>
       </Head>
-      <div className='prose w-full h-full max-w-6xl p-12 m-auto'>
+      <div className='prose w-full max-w-6xl px-12 py-8 mx-auto'>
         <h1>{title}</h1>
         {children}
       </div>

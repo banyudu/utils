@@ -6,7 +6,7 @@ const fetcher = (url: string) => axios.get(url).then(res => res.data.split('\n')
 
 type FilterFunction = (w: string) => boolean
 
-const maxSuggestions = 10
+const maxSuggestions = 30
 
 const useWordle = () => {
   const { data: words, error } = useSWRImmutable('/wordle.txt', fetcher)

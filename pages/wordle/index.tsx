@@ -158,9 +158,11 @@ const WordleCrack: FC<{}> = () => {
         </div>
         <div className='suggestion'>
           <h2>Suggestions:</h2>
-          <ul>
+          <ul className='list-none grid gap-4 grid-cols-10'>
             {suggestions.map(word => (
-              <li key={word}>{word}</li>
+              <li key={word}>
+                <span className='text-blue-500 bg-blue-100 px-2 py-1 rounded-sm'>{word}</span>
+              </li>
             ))}
           </ul>
         </div>
