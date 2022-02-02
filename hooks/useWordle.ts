@@ -9,7 +9,7 @@ type FilterFunction = (w: string) => boolean
 const maxSuggestions = 10
 
 const useWordle = () => {
-  const { data: words, error } = useSWRImmutable('/wordle-sorted.txt', fetcher)
+  const { data: words, error } = useSWRImmutable('/wordle.txt', fetcher)
   const [filterFunction, setFilterFunction] = useState<null | FilterFunction>(null)
   const [suggestions, setSuggestions] = useState<string[]>([])
 
