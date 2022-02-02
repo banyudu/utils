@@ -24,7 +24,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - run: npm i -g serverless
+    - run: npm i -g serverless @serverless/cli
     - run: npm i
     - name: Create .env file
       uses: SpicyPizza/create-envfile@master
