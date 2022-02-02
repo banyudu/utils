@@ -36,8 +36,7 @@ Wordle 中允许用户进行 6 次尝试，每次尝试后，会按字母是否�
 
 ### 注意事项
 
-- Wordle 中未说明是否允许出现重复字母，因此本助手未过滤掉包含重复字母的单词。
 - 如果助手中显示出红框，则说明填入的规则彼此冲突，如一个字母既在灰显列表中，又在给定位置的 绿色或黄色格内，就是不合理的。
 - 绿色格最多输入一个字母，黄色格最多输入5个字母。
 - 单词的排序规则是，尽量将出现频率比较高的字母排在前面，如 a e i r s 等，未考虑此单词是否常见。
-- 本项目中使用的[字典](https://utils.banyudu.com/wordle.txt)来自[dwyl/english-words](https://github.com/dwyl/english-words/blob/master/words.txt)，经过了一些过滤和排序处理。
+- 本项目中使用的[字典](https://utils.banyudu.com/wordle.txt)来自[Wordle的JS文件](https://www.powerlanguage.co.uk/wordle/main.e65ce0a5.js)，经过了排序处理。
