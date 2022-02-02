@@ -109,12 +109,11 @@ const WordleCrack: FC<{}> = () => {
     return (
       <div className='app'>
         <div className='input'>
-          <h2>Give me some information</h2>
           <div>
-            <h3>Letters not in the word</h3>
+            <h3 className='text-gray-600'>Letters not in the word</h3>
             {renderInput({
               type: 'text',
-              placeholder: 'input letters',
+              placeholder: 'gray letters',
               className: 'w-48',
               maxLength: 30,
               field: 'none'
@@ -127,8 +126,8 @@ const WordleCrack: FC<{}> = () => {
                 <thead>
                   <tr>
                     <th>Spot</th>
-                    <th>Correct letter</th>
-                    <th>Incorrect but in the word</th>
+                    <th className='text-green-600'>Correct letter</th>
+                    <th className='text-yellow-600'>Incorrect but in the word</th>
                   </tr>
                 </thead>
                 <tbody>
