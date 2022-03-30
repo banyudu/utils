@@ -3,6 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home () {
+  const apps = [
+    { name: 'Wordle 解题助手', pathname: '/wordle' },
+    // { name: '镜子', pathname: '/mirror' },
+  ]
   return (
     <div className='w-screen h-screen text-black dark:text-white bg-white dark:bg-black'>
       <Head>
@@ -11,13 +15,17 @@ export default function Home () {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='w-full h-full flex flex-col justify-center items-center'>
-        <h1 className='text-4xl mb-12'>
-          鱼肚的工具箱
-        </h1>
-        <ul className='flex flex-col'>
-          <li className='cursor-pointer underline'><Link href='/wordle'>Wordle 解题助手</Link></li>
-        </ul>
+      <main className='w-full h-full flex justify-center items-center'>
+        <article className='flex flex-col w-72 h-72'>
+          <h1 className='text-4xl mb-12'>
+            鱼肚的工具箱
+          </h1>
+          <ul className='flex flex-col'>
+            {apps.map(app => (
+              <li className='cursor-pointer underline mb-2'><Link href={app.pathname}>{app.name}</Link></li>
+            ))}
+          </ul>
+        </article>
       </main>
 
       <footer className=''>

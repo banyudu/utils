@@ -27,7 +27,7 @@ jobs:
     - run: npm i -g @serverless/cli
     - run: npm i
     - name: Create .env file
-      uses: SpicyPizza/create-envfile@master
+      uses: SpicyPizza/create-envfile@v1.3
       with:
         envkey_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         envkey_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
