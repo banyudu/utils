@@ -8,14 +8,18 @@ const Mirror: FC<{}> = () => {
       audio: false,
       video: {
         width: screen.width,
-        height: screen.height
+        height: screen.height,
+        facingMode: 'user',
       }
     }
     navigator.mediaDevices.getUserMedia(constraints)
-      .then(function(stream) {
+      .then(async function(stream) {
         /* 使用这个stream stream */
         if (videoRef.current) {
           videoRef.current.srcObject = stream
+          await videoRef.current.requestFullscreen()
+            .then(() => console.log('request full screen resolved'))
+            .catch(() => console.log('request full screen rejected'))
           videoRef.current.play()
         }
       })
@@ -24,14 +28,13 @@ const Mirror: FC<{}> = () => {
       });
   }, [videoRef.current])
   return (
-    <Layout title='Mirror'>
       <video
         ref={videoRef}
-        className='w-full h-full'
-        controls
+        // className='w-full h-full'
+        className='w-screen h-screen'
+        // controls
         autoPlay
       />
-    </Layout>
   )
 }
 

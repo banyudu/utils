@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function Home () {
   const apps = [
     { name: 'Wordle 解题助手', pathname: '/wordle' },
-    // { name: '镜子', pathname: '/mirror' },
+    { name: '镜子', pathname: '/mirror' },
   ]
   return (
     <div className='w-screen h-screen text-black dark:text-white bg-white dark:bg-black'>
