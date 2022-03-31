@@ -12,7 +12,7 @@ const Mirror: FC<{}> = () => {
         facingMode: 'user',
       }
     }
-    navigator.mediaDevices.getUserMedia(constraints)
+    navigator.mediaDevices?.getUserMedia?.(constraints)
       .then(async function(stream) {
         /* 使用这个stream stream */
         if (videoRef.current) {
@@ -28,13 +28,15 @@ const Mirror: FC<{}> = () => {
       });
   }, [videoRef.current])
   return (
-      <video
-        ref={videoRef}
-        // className='w-full h-full'
-        className='w-screen h-screen'
-        // controls
-        autoPlay
-      />
+    <video
+      ref={videoRef}
+      // className='w-full h-full'
+      className='w-screen h-screen'
+      controls
+      playsInline
+      muted
+      autoPlay
+    />
   )
 }
 
