@@ -7,11 +7,12 @@ const Mirror: FC<{}> = () => {
     const constraints = {
       audio: false,
       video: {
-        width: screen.width,
-        height: screen.height,
+        width: window.innerWidth,
+        height: window.innerHeight,
         facingMode: 'user',
       }
     }
+    console.log('constraints is: ', constraints)
     navigator.mediaDevices?.getUserMedia?.(constraints)
       .then(async function(stream) {
         /* 使用这个stream stream */
@@ -31,7 +32,7 @@ const Mirror: FC<{}> = () => {
     <video
       ref={videoRef}
       // className='w-full h-full'
-      className='w-screen h-screen'
+      className='w-screen h-screen object-fill'
       controls
       playsInline
       muted
