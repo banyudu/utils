@@ -4,6 +4,8 @@ import Layout from 'components/layout'
 const Mirror: FC<{}> = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   useEffect(() => {
+    let mediaStream: MediaStream | null = null
+
     const constraints = {
       audio: false,
       video: {
@@ -12,11 +14,12 @@ const Mirror: FC<{}> = () => {
         facingMode: 'user',
       }
     }
-    console.log('constraints is: ', constraints)
+
     navigator.mediaDevices?.getUserMedia?.(constraints)
       .then(async function(stream) {
         /* 使用这个stream stream */
         if (videoRef.current) {
+          mediaStream = stream
           videoRef.current.srcObject = stream
           await videoRef.current.requestFullscreen()
             .then(() => console.log('request full screen resolved'))
@@ -27,6 +30,10 @@ const Mirror: FC<{}> = () => {
       .catch(function(err) {
         /* 处理error */
       });
+
+    return () => {
+      mediaStream?.getTracks().forEach(track => track.stop())
+    }
   }, [videoRef.current])
   return (
     <video
