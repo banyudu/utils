@@ -15,7 +15,7 @@ const Layout: FC<LayoutProps> = ({ children, title, showGithub = true }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <div className='prose dark:prose-invert w-full max-w-6xl px-12 py-8 mx-auto'>
+      <div className='prose dark:prose-invert w-full h-full max-w-6xl px-12 py-8 mx-auto flex flex-col'>
         <div className='flex flex-row items-center mb-8 justify-between'>
           <h1 className='m-0'>{title}</h1>
           <a
@@ -25,7 +25,9 @@ const Layout: FC<LayoutProps> = ({ children, title, showGithub = true }) => {
             <img width={36} src="/github.svg" alt="Github" />
           </a>
         </div>
-        {children}
+        <div className='flex-1'>
+          {children}
+        </div>
       </div>
     </div>
   )

@@ -6,6 +6,7 @@ export default function Home () {
   const apps = [
     { name: 'Wordle 解题助手', pathname: '/wordle' },
     { name: '镜子', pathname: '/mirror' },
+    { name: '身份证生成器', pathname: '/id-generator' },
   ]
   return (
     <div className='w-screen h-screen text-black dark:text-white bg-white dark:bg-black'>
@@ -22,7 +23,9 @@ export default function Home () {
           </h1>
           <ul className='flex flex-col'>
             {apps.map(app => (
-              <li className='cursor-pointer underline mb-2'><Link href={app.pathname}>{app.name}</Link></li>
+              <li key={app.pathname} className='cursor-pointer underline mb-2'>
+                <Link href={app.pathname}>{app.name}</Link>
+              </li>
             ))}
           </ul>
         </article>
