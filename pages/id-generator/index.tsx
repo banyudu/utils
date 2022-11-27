@@ -24,7 +24,8 @@ const defaultAvatars = [
   'https://banyudu.github.io/images/20221127025035.png', // 哆啦a梦
   'https://banyudu.github.io/images/20221127025334.png', // 孙悟空
   'https://banyudu.github.io/images/20221127025703.png', // 哪吒
-  'https://banyudu.github.io/images/20221127051057.png' // 阿尼亚
+  'https://banyudu.github.io/images/20221127184026.png', // 猫咪
+  'https://banyudu.github.io/images/20221127184215.png', // 阿尼亚
 ]
 
 const defaultEthnics = [
@@ -241,7 +242,7 @@ const IDGenerator: FC<{}> = () => {
         <div className='content flex flex-1 flex-col-reverse md:flex-row'>
           <div className='form flex flex-1 flex-col w-full md:w-1/2 dark:bg-slate-900'>
             {/* 姓名 */}
-            <div className='flex mb-2 justify-between flex-col md:flex-row md:justify-between'>
+            <div className='flex mb-2 justify-between flex-col md:flex-row md:justify-between flex-wrap'>
               <div className='flex justify-start'>
                 <label htmlFor='name' className='w-20'>
                   姓名：
@@ -271,7 +272,7 @@ const IDGenerator: FC<{}> = () => {
               </div>
             </div>
             {/* 出生日期 */}
-            <div className='flex mb-2 flex-col md:flex-row justify-between'>
+            <div className='flex mb-2 flex-col md:flex-row justify-between flex-wrap'>
               <div>
                 <label htmlFor='birthday' className='w-20'>
                   出生日期：
@@ -289,17 +290,22 @@ const IDGenerator: FC<{}> = () => {
                 <label htmlFor='birthday' className='md:ml-4 w-20'>
                   民族：
                 </label>
-                <input
-                  type='text'
+                <select
                   name='ethnic'
                   className='border-2 border-blue-500 ml-4 px-2 dark:bg-slate-900 flex-1 rounded'
                   value={ethnic}
                   onChange={e => setEthnic(e.target.value)}
-                />
+                >
+                  {defaultEthnics.map(item => {
+                    return (
+                      <option value={item} key={item}>{item}</option>
+                    )
+                  })}
+                </select>
               </div>
             </div>
             {/* 地址 */}
-            <div className='flex mb-2 items-center'>
+            <div className='flex mb-2 items-center flex-wrap'>
               <label htmlFor='county' className='w-20 whitespace-nowrap'>
                 地区：
               </label>
@@ -388,7 +394,7 @@ const IDGenerator: FC<{}> = () => {
                       width={100}
                       height={100}
                       onClick={() => setAvatar(item)}
-                      className='my-1'
+                      className='my-1 pointer-events-none'
                     />
                   </div>
                 )
@@ -486,7 +492,7 @@ const IDGenerator: FC<{}> = () => {
                         src={avatar}
                         alt='avatar'
                         width={96}
-                        className='m-0'
+                        className='m-0 pointer-events-none'
                       />
                     )}
                   </div>
@@ -504,7 +510,7 @@ const IDGenerator: FC<{}> = () => {
                     <img
                       src='https://banyudu.github.io/images/id_badge.png'
                       alt='id badge'
-                      className='m-0'
+                      className='m-0 pointer-events-none'
                       width={48}
                     />
                   </div>
