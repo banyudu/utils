@@ -200,6 +200,16 @@ const IDGenerator: FC<{}> = () => {
     ])
   }
 
+  const handleDownloadFront = async () => {
+    // 下载图片
+    await exportDom(document.querySelector('#preview-front') as HTMLDivElement, '身份证正面.png')
+  }
+
+  const handleDownloadBack = async () => {
+    // 下载图片
+    await exportDom(document.querySelector('#preview-back') as HTMLDivElement, '身份证背面.png')
+  }
+
   useEffect(() => {
     setCity(Random.pick(province.cities))
   }, [province])
@@ -228,10 +238,10 @@ const IDGenerator: FC<{}> = () => {
         <div className='warn text-red-600 mb-8'>
           本工具仅用于测试目的，请勿用于其它用途。本人不承担因此带来的任何责任。
         </div>
-        <div className='content flex flex-1'>
-          <div className='form flex flex-1 flex-col w-1/2 dark:bg-slate-900'>
+        <div className='content flex flex-1 flex-col-reverse md:flex-row'>
+          <div className='form flex flex-1 flex-col w-full md:w-1/2 dark:bg-slate-900'>
             {/* 姓名 */}
-            <div className='flex mb-2 items-center justify-between'>
+            <div className='flex mb-2 justify-between flex-col md:flex-row md:justify-between'>
               <div className='flex justify-start'>
                 <label htmlFor='name' className='w-20'>
                   姓名：
@@ -245,8 +255,8 @@ const IDGenerator: FC<{}> = () => {
                 />
               </div>
               {/* 性别 */}
-              <div className='flex justify-start w-1/2'>
-                <label htmlFor='gender' className='ml-4 w-20'>
+              <div className='flex justify-start w-1/2 mt-2 md:mt-0'>
+                <label htmlFor='gender' className='md:ml-4 w-20'>
                   性别：
                 </label>
                 <select
@@ -261,7 +271,7 @@ const IDGenerator: FC<{}> = () => {
               </div>
             </div>
             {/* 出生日期 */}
-            <div className='flex mb-2 items-center justify-between'>
+            <div className='flex mb-2 flex-col md:flex-row justify-between'>
               <div>
                 <label htmlFor='birthday' className='w-20'>
                   出生日期：
@@ -275,8 +285,8 @@ const IDGenerator: FC<{}> = () => {
                 />
               </div>
               {/* 民族 */}
-              <div className='flex justify-start w-1/2'>
-                <label htmlFor='birthday' className='ml-4 w-20'>
+              <div className='flex justify-start w-1/2 mt-2 md:mt-0'>
+                <label htmlFor='birthday' className='md:ml-4 w-20'>
                   民族：
                 </label>
                 <input
@@ -406,15 +416,22 @@ const IDGenerator: FC<{}> = () => {
               <button
                 className='px-2 py-1 mr-4 rounded border bg-blue-500 text-slate-900 border-blue-500 disabled:text-gray-500'
                 disabled={disableDownload}
-                onClick={handleDownload}
+                onClick={handleDownloadFront}
               >
-                下载图片
+                下载正面
+              </button>
+              <button
+                className='px-2 py-1 mr-4 rounded border bg-blue-500 text-slate-900 border-blue-500 disabled:text-gray-500'
+                disabled={disableDownload}
+                onClick={handleDownloadBack}
+              >
+                下载背面
               </button>
             </div>
           </div>
-          <div className='preview flex flex-col items-end w-[320px] font-id text-xs font-semibold'>
+          <div className='preview flex flex-col items-end w-[320px] font-id text-xs font-semibold md:flex-col my-8 sm:my-0'>
             <div id='preview-front' className='preview-front flex justify-center items-center mb-4 text-[#307381]'>
-              <div className='bg-[url("https://banyudu.github.io/images/id_front.png")] w-[280px] h-[175px] bg-cover flex flex-col px-4 py-5'>
+              <div className='bg-[url("https://banyudu.github.io/images/id_front.jpg")] w-[280px] h-[175px] bg-cover flex flex-col px-4 py-5'>
                 <div className='content flex-1 flex'>
                   <div className='info flex-1 flex flex-col'>
                     <div className='flex items-center h-6'>
@@ -481,7 +498,7 @@ const IDGenerator: FC<{}> = () => {
               </div>
             </div>
             <div id='preview-back' className='preview-back flex justify-center items-center text-stone-900'>
-              <div className='bg-[url("https://banyudu.github.io/images/id_back.png")] w-[280px] h-[175px] bg-cover px-5 py-4 flex flex-col justify-between'>
+              <div className='bg-[url("https://banyudu.github.io/images/id_back.jpg")] w-[280px] h-[175px] bg-cover px-5 py-4 flex flex-col justify-between'>
                 <div className='title flex h-14'>
                   <div className='badge w-12'>
                     <img
