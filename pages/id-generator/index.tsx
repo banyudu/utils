@@ -87,6 +87,43 @@ const defaultEthnics = [
   '壮'
 ]
 
+const apartmentSuffixes = [
+  '苑',
+  '园',
+  '佳苑',
+  '佳园',
+  '里',
+  '村',
+  '大厦',
+  '家园',
+  '中心',
+  '小镇',
+  '新城',
+  '新干线',
+  '城',
+  '东方城',
+  '公寓',
+  '都市',
+  '天地',
+  '阁',
+  '山水',
+  '庭',
+  '小区',
+  '湾',
+  '家',
+  '谷',
+  '馆',
+  '豪庭',
+  '国度',
+  '国际',
+  '府',
+  '岛',
+  '庄',
+  '院',
+  '湖',
+  '山'
+]
+
 function saveAs (uri: string, filename: string) {
   var link = document.createElement('a')
 
@@ -136,7 +173,17 @@ const IDGenerator: FC<{}> = () => {
     setGender(Math.random() >= 0.5 ? '男' : '女')
     setBirthday(Random.date())
     setEthnic(Math.random() > 0.9 ? Random.pick(defaultEthnics) : '汉')
-    setAddress('无名小镇')
+
+    const apartmentName = Random.ctitle(2, 4)
+    const apartmentSuffix = Random.pick(apartmentSuffixes)
+    const house = Random.integer(1, 30)
+    const unit = Random.integer(1, 6)
+    const floor = Random.integer(1, 30)
+    const door = Random.integer(1, 4)
+    const houseId = `${house}号楼${unit}单元${floor}0${door}号`
+    const newAddress = apartmentName + apartmentSuffix + houseId
+
+    setAddress(newAddress)
 
     const newProvince: Province = Random.pick(provinces)
     const newCity: City = Random.pick(newProvince.cities)
