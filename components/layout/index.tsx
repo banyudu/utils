@@ -21,8 +21,14 @@ const Layout: FC<LayoutProps> = ({ children, title, showGithub = true }) => {
           <a
             href={`https://github.com/banyudu/utils/tree/main/pages${router.pathname}`}
             target='_blank'
-            rel='noopener noreferer'>
-            <img width={36} src="/github.svg" alt="Github" />
+            rel='noopener noreferer'
+          >
+            <img
+              width={36}
+              src="/github.svg"
+              alt="Github"
+              className='dark:bg-white rounded-full'
+            />
           </a>
         </div>
         <div className='flex-1'>

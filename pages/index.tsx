@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 export default function Home () {
   const apps = [
-    { name: 'Wordle 解题助手', pathname: '/wordle' },
-    { name: '镜子', pathname: '/mirror' },
-    { name: '身份证生成器', pathname: '/id-generator' },
+    { name: 'Wordle 解题助手', pathname: '/wordle', cover: 'https://banyudu.github.io/images/wordle.png' },
+    { name: '镜子', pathname: '/mirror', cover: 'https://banyudu.github.io/images/20221127205403.png' },
+    { name: '身份证生成器', pathname: '/id-generator', cover: 'https://banyudu.github.io/images/id_generated.png' },
   ]
   return (
     <div className='w-screen h-screen text-black dark:text-white bg-white dark:bg-black'>
@@ -17,14 +17,19 @@ export default function Home () {
       </Head>
 
       <main className='w-full h-full flex justify-center items-center'>
-        <article className='flex flex-col w-72 h-72'>
+        <article className='flex flex-col h-72'>
           <h1 className='text-4xl mb-12'>
             鱼肚的工具箱
           </h1>
-          <ul className='flex flex-col'>
+          <ul className='flex flex-row'>
             {apps.map(app => (
-              <li key={app.pathname} className='cursor-pointer underline mb-2'>
-                <Link href={app.pathname}>{app.name}</Link>
+              <li key={app.pathname} className='cursor-pointer underline mb-2 w-48'>
+                <Link href={app.pathname}>
+                  <div className='flex flex-col'>
+                    <img src={app.cover} alt="app cover" className='w-36 h-24 object-cover' width={96} />
+                    <span className='mt-4'>{app.name}</span>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
