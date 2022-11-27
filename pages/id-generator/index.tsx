@@ -441,7 +441,7 @@ const IDGenerator: FC<{}> = () => {
                       width={100}
                       height={100}
                       onClick={() => setAvatar(item)}
-                      className='my-1 pointer-events-none'
+                      className='my-1'
                     />
                   </div>
                 )
@@ -487,13 +487,13 @@ const IDGenerator: FC<{}> = () => {
               <div className='bg-[url("https://banyudu.github.io/images/id_front.jpg")] w-[280px] h-[175px] bg-cover flex flex-col px-4 py-5'>
                 <div className='content flex-1 flex'>
                   <div className='info flex-1 flex flex-col'>
-                    <div className='flex items-center h-6'>
+                    <div className='flex items-center h-5'>
                       <label className='mr-1 w-8'>姓名</label>
                       <span className='text-sm text-stone-800'>
                         {(name ?? '--').split('').join(' ')}
                       </span>
                     </div>
-                    <div className='flex items-center h-6'>
+                    <div className='flex items-center h-5'>
                       <div className='mr-4'>
                         <label className='mr-3 w-8'>性别</label>
                         <span className='text-stone-800'>
@@ -507,7 +507,7 @@ const IDGenerator: FC<{}> = () => {
                         </span>
                       </div>
                     </div>
-                    <div className='flex items-center h-6'>
+                    <div className='flex items-center h-5'>
                       <div className='mr-1'>
                         <label className='w-8'>出生</label>
                         <span className='text-stone-800 mx-1.5'>
@@ -544,7 +544,7 @@ const IDGenerator: FC<{}> = () => {
                     )}
                   </div>
                 </div>
-                <div className='footer h-6 flex items-center'>
+                <div className='footer h-4 flex items-center'>
                   <label className='mr-3'>公民身份号码</label>
                   <span className='text-sm text-stone-800'>{idNo}</span>
                 </div>
