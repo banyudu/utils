@@ -124,6 +124,20 @@ const apartmentSuffixes = [
   '山'
 ]
 
+const getMockGenderFromName = (name: string): '男' | '女' => {
+  /**
+   * Mockjs 中的人名列表为
+   * '伟 芳 娜 秀英 敏 静 丽 强 磊 军 ' +
+			'洋 勇 艳 杰 娟 涛 明 超 秀兰 霞 ' +
+			'平 刚 桂英'
+
+      根据人名，可以粗略推测出可能的性别。给出更合理的默认值
+   */
+
+  const maleSuffixes = ['伟', '强', '磊', '军', '洋', '勇', '杰', '涛', '明', '超', '平', '刚']
+  return maleSuffixes.some(item => name.endsWith(item)) ? '男' : '女'
+}
+
 function saveAs (uri: string, filename: string) {
   var link = document.createElement('a')
 
@@ -160,7 +174,6 @@ const IDGenerator: FC<{}> = () => {
   const [address, setAddress] = useState('')
   const [avatar, setAvatar] = useState('')
   const [validateStart, setValidateStart] = useState('')
-  const [validateEnd, setValidateEnd] = useState('')
   const [province, setProvince] = useState(provinces[0])
   const [city, setCity] = useState(province.cities[0])
   const [county, setCounty] = useState(city.counties[0])
@@ -169,9 +182,16 @@ const IDGenerator: FC<{}> = () => {
 
   useEffect(() => {
     // random values
-    setName(Random.cname())
-    setGender(Math.random() >= 0.5 ? '男' : '女')
-    setBirthday(Random.date())
+    const newName = Random.cname()
+    setName(newName)
+    setGender(getMockGenderFromName(newName))
+
+    let newBirthday = Random.date()
+    while (newBirthday > dayjs().format('YYYY-MM-DD') || newBirthday < dayjs().subtract(200, 'years').format('YYYY-MM-DD')) {
+      // 不能超过当前日期，也不能超过200岁
+      newBirthday = Random.date()
+    }
+    setBirthday(newBirthday)
     setEthnic(Math.random() > 0.9 ? Random.pick(defaultEthnics) : '汉')
 
     const apartmentName = Random.ctitle(2, 4)
@@ -194,7 +214,7 @@ const IDGenerator: FC<{}> = () => {
     setCounty(newCounty)
 
     setValidateStart(dayjs().format('YYYY-MM-DD'))
-    setValidateEnd(dayjs().add(10, 'years').format('YYYY-MM-DD'))
+
     setAvatar(Random.pick(defaultAvatars))
   }, [refreshKey])
 
@@ -202,6 +222,37 @@ const IDGenerator: FC<{}> = () => {
     const realCityname = ['市辖区', '县'].includes(city.name) || (county.name === city.name) ? '' : city.name
     return province.name + realCityname + county.name + address
   }, [province, city, county, address])
+
+  const validateEnd = useMemo(() => {
+    if (!birthday || !validateStart) {
+      return '--'
+    }
+    const startObj = dayjs(validateStart)
+    const birthObj = dayjs(birthday)
+
+    if (startObj < birthObj) {
+      return '--'
+    }
+
+     /**
+     * 身份证有效期计算规则：
+     * 1）、未满十六周岁，有效期五年；
+     * 2）、十六周岁至二十五周岁的，有效期十年；
+     * 3）、二十六周岁至四十五周岁的，有效期二十年；
+     * 4）、四十六周岁以上的，长期
+     */
+
+     if (startObj < dayjs(birthObj).add(16, 'years')) {
+      return dayjs(startObj).add(5, 'years').format('YYYY-MM-DD')
+     }
+     if (startObj < dayjs(birthObj).add(26, 'years')) {
+      return dayjs(startObj).add(10, 'years').format('YYYY-MM-DD')
+     }
+     if (startObj < dayjs(birthObj).add(46, 'years')) {
+      return dayjs(startObj).add(20, 'years').format('YYYY-MM-DD')
+     }
+     return '长期'
+  }, [birthday, validateStart])
 
   const idNo = useMemo(() => {
     const areaCode = String(county.id).padEnd(6, '0')
@@ -239,14 +290,6 @@ const IDGenerator: FC<{}> = () => {
     validateEnd,
     avatar
   ])
-
-  const handleDownload = async () => {
-    // 下载图片
-    await Promise.all([
-      exportDom(document.querySelector('#preview-front') as HTMLDivElement, '身份证正面.png'),
-      exportDom(document.querySelector('#preview-back') as HTMLDivElement, '身份证背面.png')
-    ])
-  }
 
   const handleDownloadFront = async () => {
     // 下载图片
@@ -422,13 +465,11 @@ const IDGenerator: FC<{}> = () => {
                 onChange={e => setValidateStart(e.target.value)}
               />
               <span className='ml-4'>-</span>
-              <input
-                type='date'
-                name='validateEnd'
-                className='border-2 border-blue-500 ml-4 px-2 dark:bg-slate-900 rounded'
-                value={validateEnd}
-                onChange={e => setValidateEnd(e.target.value)}
-              />
+              <span
+                className='border border-blue-500 ml-4 px-2 dark:bg-slate-900 rounded'
+              >
+                {validateEnd}
+              </span>
             </div>
             {/* 头像 */}
             <div className='flex mb-2 items-center'>
