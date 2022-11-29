@@ -177,7 +177,7 @@ const IDGenerator: FC<{}> = () => {
   const [province, setProvince] = useState(provinces[0])
   const [city, setCity] = useState(province.cities[0])
   const [county, setCounty] = useState(city.counties[0])
-  const [orderNo, setOrderNo] = useState(Math.round((Math.random() * 1000 + 1)) % 1000)
+  const [orderNo, setOrderNo] = useState(String(Math.round((Math.random() * 1000 + 1)) % 1000))
 
   const [refreshKey, setRefreshKey] = useState(Math.random())
 
@@ -218,7 +218,7 @@ const IDGenerator: FC<{}> = () => {
 
     setAvatar(Random.pick(defaultAvatars))
 
-    setOrderNo(Math.round((Math.random() * 1000 + 1)) % 1000)
+    setOrderNo(String(Math.round((Math.random() * 1000 + 1)) % 1000))
   }, [refreshKey])
 
   const fullAddress = useMemo(() => {
@@ -506,16 +506,17 @@ const IDGenerator: FC<{}> = () => {
               />
             </div>
             <div className='flex mb-2 items-center'>
-              <label htmlFor='avatar' className='w-20'>
+              <label htmlFor='avatar' className='w-20' title='身份证倒数第4位到倒数第2位'>
                 序号：
               </label>
               <input
                 type='text'
+                title='身份证倒数第4位到倒数第2位'
                 name='orderNo'
                 className='border-2 border-blue-500 ml-4 px-2 dark:bg-slate-900 w-24 rounded'
                 value={orderNo}
                 maxLength={3}
-                onChange={e => setOrderNo(Number(e.target.value.replace(/[^0-9]/g, '').substring(0, 3)) || 0)}
+                onChange={e => setOrderNo(e.target.value.replace(/[^0-9]/g, '').substring(0, 3))}
               />
             </div>
             <div className='buttons flex mt-4'>
