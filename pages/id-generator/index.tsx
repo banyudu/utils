@@ -177,6 +177,7 @@ const IDGenerator: FC<{}> = () => {
   const [province, setProvince] = useState(provinces[0])
   const [city, setCity] = useState(province.cities[0])
   const [county, setCounty] = useState(city.counties[0])
+  const [orderNo, setOrderNo] = useState(Math.round((Math.random() * 1000 + 1)) % 1000)
 
   const [refreshKey, setRefreshKey] = useState(Math.random())
 
@@ -216,6 +217,8 @@ const IDGenerator: FC<{}> = () => {
     setValidateStart(dayjs().format('YYYY-MM-DD'))
 
     setAvatar(Random.pick(defaultAvatars))
+
+    setOrderNo(Math.round((Math.random() * 1000 + 1)) % 1000)
   }, [refreshKey])
 
   const fullAddress = useMemo(() => {
@@ -254,12 +257,15 @@ const IDGenerator: FC<{}> = () => {
      return '长期'
   }, [birthday, validateStart])
 
-  const idNo = useMemo(() => {
+  const pre14 = useMemo(() => {
     const areaCode = String(county.id).padEnd(6, '0')
     const birthdayCode = birthday.replace(/-/g, '')
-    const orderCode = Math.round((Math.random() * 1000 + 1)) % 1000
-    const pre17 = areaCode + birthdayCode + orderCode
+    return `${areaCode}${birthdayCode}`
+  }, [county, birthday])
 
+  const pre17 = `${pre14}${String(orderNo).padStart(3, '0')}`
+
+  const idNo = useMemo(() => {
     const ratio = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];	// 系数
     const matchMap: Record<number, string> = {
       0: "1",
@@ -279,15 +285,14 @@ const IDGenerator: FC<{}> = () => {
     }, 0)
 
     const checkBit = matchMap[checkBitValue % 11]
-    return pre17 + checkBit
+    return `${pre17}${checkBit}`
   }, [
     name,
     gender,
-    birthday,
     ethnic,
-    address,
     validateStart,
     validateEnd,
+    pre17,
     avatar
   ])
 
@@ -498,6 +503,19 @@ const IDGenerator: FC<{}> = () => {
                 className='border-2 border-blue-500 ml-4 px-2 dark:bg-slate-900 flex-1 rounded'
                 value={avatar}
                 onChange={e => setAvatar(e.target.value)}
+              />
+            </div>
+            <div className='flex mb-2 items-center'>
+              <label htmlFor='avatar' className='w-20'>
+                序号：
+              </label>
+              <input
+                type='text'
+                name='orderNo'
+                className='border-2 border-blue-500 ml-4 px-2 dark:bg-slate-900 w-24 rounded'
+                value={orderNo}
+                maxLength={3}
+                onChange={e => setOrderNo(Number(e.target.value.replace(/[^0-9]/g, '').substring(0, 3)) || 0)}
               />
             </div>
             <div className='buttons flex mt-4'>
